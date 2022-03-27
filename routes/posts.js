@@ -12,7 +12,7 @@ router.use(decodeUserFromToken)
 
 router.post('/', checkAuth, postsCtrl.create)
 
-router.delete('/:id', postsCtrl.delete)
+router.delete('/:id', checkAuth, postsCtrl.delete)
 
 export{router}
 
