@@ -33,15 +33,16 @@ function create(req, res) {
 
 function show (req, res) {
   Post.findById(req.params.id)
-  .populate('owner')
   .then(post => res.json(post))
   .catch(err => res.json(err))
+  console.log(req.params.id)
 }
 
 function deletePost (req, res) {
   Post.findByIdAndDelete(req.params.id)
   .then(post => res.json(post))
   .catch(err => res.json(err))
+  console.log('test')
 }
 
 export {
