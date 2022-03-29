@@ -33,8 +33,12 @@ function create(req, res) {
 
 function show (req, res) {
   Post.findById(req.params.id)
-  .populate('owner')
-  .then(post => res.json(post))
+  .then(post => {
+    post.populate('owner')
+    .then(populatedPost => {
+      res.json(populatedPost)
+    })
+  })
   .catch(err => res.json(err))
 }
 
@@ -46,7 +50,10 @@ function deletePost (req, res) {
 
 function update (req, res) {
   Post.findByIdAndUpdate(req.params.id, req.body, {new:true})
-  .then(post => res.json(post))
+  .then(post => {
+    post.populate('owner')
+    .then(populatedPost => res.json(populatedPost))
+  })
   .catch(err => res.json(err))
 }
 
